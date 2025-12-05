@@ -1,36 +1,221 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+📄 README.md — Gemini Medical Record Organizer (Next.js App Router, No Auth Version)
 
-## Getting Started
+An AI-powered medical record organizer built using Next.js 14 (App Router), Google Gemini, and Firebase Firestore.
 
-First, run the development server:
+Users paste unformatted medical text, and the system automatically:
 
-```bash
+Extracts structured medical fields
+
+Generates a clean Markdown report
+
+Saves the output to Firestore
+
+Displays all processed records in real time
+
+This version uses no traditional login — it relies on either no auth or anonymous Firebase authentication, making it ideal for demos, prototypes, internal tooling, and pre-production environments.
+
+🚀 Features
+🧠 AI Medical Parsing
+
+Uses Google Gemini 2.5 Flash with structured JSON output via responseSchema.
+
+⚡ Built with Next.js App Router
+
+/app directory
+
+Server & Client Components
+
+Fast refresh & edge-friendly architecture
+
+🔄 Real-Time Database Updates
+
+Records stored under:
+
+artifacts/{APP_ID}/public/data/medicalRecords
+
+
+Firestore listeners update UI automatically.
+
+📄 Downloadable Markdown Reports
+
+After processing, users can view or download a .md file summarizing the entire record.
+
+🎨 TailwindCSS UI
+
+Clean, minimal design with:
+
+Input panel
+
+Real-time records list
+
+Detail modal with markdown preview
+
+🧱 Tech Stack
+Layer	Technology
+Framework	Next.js 14+ (App Router)
+Frontend	React, Client Components
+Styling	TailwindCSS
+AI Engine	Google Gemini 2.5 Flash
+Database	Firebase Firestore
+Authentication	Optional anonymous auth
+State	React Hooks
+📁 Project Structure (Next.js App Router)
+/app
+  /components
+    /MedicalRecordOrganizer
+      index.js               # Main container (Firestore connection + AI logic)
+      InputPanel.js          # User input + processing button
+      RecordsDisplay.js      # Searchable real-time list of results
+      RecordCard.js          # UI card for each record
+      DetailModal.js         # Full markdown + download
+      utils.js               # Gemini + helper utilities
+      config.js              # Firebase + Gemini configuration
+  /page.js                   # Entry point for Next.js App Router
+
+
+➡ This is the standard Next.js App Router architecture (not /pages).
+
+⚙️ Setup Instructions
+1️⃣ Install dependencies
+npm install
+
+2️⃣ Create .env.local
+NEXT_PUBLIC_GEMINI_API_KEY="YOUR_GEMINI_KEY"
+
+NEXT_PUBLIC_FIREBASE_API_KEY="..."
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="..."
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="..."
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="..."
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="..."
+NEXT_PUBLIC_FIREBASE_APP_ID="..."
+
+NEXT_PUBLIC_APP_INSTANCE_ID="medical-org"
+
+
+You can find Firebase config in:
+
+Firebase Console → Project Settings → General → Your Web App
+
+🔥 Firebase Setup
+➤ Enable Firestore
+Build → Firestore Database → Create Database
+
+
+Choose Start in Test Mode.
+
+➤ (Optional) Enable Anonymous Auth
+
+Since Next.js interacts with Firestore via the client SDK, Firebase requires some form of auth.
+
+Enable this:
+
+Build → Authentication → Sign-in Method → Anonymous → Enable
+
+
+No user interaction required.
+
+➤ Firestore Rules (open for development)
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Allows full read/write for development.
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
+
+Click Publish.
+
+⚠️ Do NOT use these in production — they allow public access.
+
+▶️ Run the Next.js App
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Visit:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000
 
-## Learn More
+🧠 AI Processing Workflow
+1. User pastes raw text
 
-To learn more about Next.js, take a look at the following resources:
+In the InputPanel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Gemini transforms it → structured JSON
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Using responseSchema:
 
-## Deploy on Vercel
+{
+  "patientName": "...",
+  "dob": "...",
+  "diagnosis": ["..."],
+  "provider": "...",
+  "visitDate": "...",
+  "summary": "...",
+  "medications": ["..."]
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Markdown report is auto-generated
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Stored as markdownReport.
+
+4. Data is saved to Firestore
+
+Path:
+
+artifacts/{APP_ID}/public/data/medicalRecords
+
+5. Firestore onSnapshot updates UI
+
+Records appear instantly in the list.
+
+6. Users download or view the report
+
+Modal includes a Markdown preview + download button.
+
+📄 Example Firestore Document
+{
+  "patientName": "John Doe",
+  "dob": "1983-02-05",
+  "diagnosis": ["Hypertension"],
+  "provider": "Dr. Smith",
+  "visitDate": "2025-01-12",
+  "summary": "...",
+  "medications": ["Lisinopril"],
+  "markdownReport": "# Patient Medical Record Summary ...",
+  "rawText": "Patient presents with...",
+  "createdAt": "...timestamp...",
+  "processedBy": "anonymous-uid",
+}
+
+💡 Future Enhancements
+
+Add full auth (email/password, Google OAuth, etc.)
+
+Export PDF instead of Markdown
+
+OCR image upload → AI extraction
+
+Improve record validation
+
+Per-user Firestore isolation (if authentication added)
+
+HIPAA-ready rule configuration
+
+📦 Deployment (Next.js)
+Recommended: Vercel
+
+Push project to GitHub
+
+Import repo into Vercel
+
+Add all .env.local values to Vercel environment variables
+
+Deploy → Works instantly with App Router
+
+📝 License
+
+MIT License — free to use, modify, and distribute.
