@@ -1,4 +1,4 @@
-##📄 README.md — Gemini Medical Record Organizer (Next.js App Router, No Auth Version)
+##README.md — Gemini Medical Record Organizer (Next.js App Router, No Auth Version)
 
 An AI-powered medical record organizer built using Next.js 14 (App Router), Google Gemini, and Firebase Firestore.
 
