@@ -1,5 +1,5 @@
 // app/components/MedicalRecordOrganizer/utils.js
-
+import { API_URL, GEMINI_API_KEY } from './config';
 /**
  * Handles fetch requests with exponential backoff for resilience.
  * @param {string} url The API endpoint URL.
@@ -52,3 +52,67 @@ export const createMarkdownReport = (data) => {
 > ${data.summary || 'No detailed summary provided by AI analysis.'}
 `;
 };
+
+export async function generateSampleRawMedicalText() {
+  if (!GEMINI_API_KEY) {
+    throw new Error('GEMINI_API_KEY is missing. Check your .env.local file.');
+  }
+
+  const systemPrompt =
+    "You generate realistic, messy, unstructured patient medical notes for testing. " +
+    "Do NOT format anything as JSON or Markdown. Do NOT add explanations. " +
+    "Output only the raw note text, as a single block of text, with line breaks, " +
+    "shorthand, abbreviations, and inconsistent formatting like rushed clinician notes.";
+
+  const userPrompt = `
+Make up a new patient encounter note with details like:
+
+- chief complaint
+- brief history
+- meds
+- allergies
+- physical exam
+- assessment / plan
+
+But keep it VERY UNFORMATTED:
+- inconsistent spacing
+- weird punctuation
+- shorthand
+- partial sentences
+- messy line breaks
+
+Again: DO NOT wrap in code fences. DO NOT use Markdown headings. Just raw text.
+`;
+
+  const payload = {
+    contents: [{ parts: [{ text: userPrompt }] }],
+    systemInstruction: { parts: [{ text: systemPrompt }] },
+    generationConfig: {
+      responseMimeType: 'text/plain',
+    },
+  };
+
+  const res = await fetchWithBackoff(`${API_URL}?key=${GEMINI_API_KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Gemini sample generator error ${res.status}: ${text}`);
+  }
+
+  const json = await res.json();
+  const text =
+    json?.candidates?.[0]?.content?.parts?.[0]?.text ||
+    json?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+
+  if (!text) {
+    throw new Error('Gemini returned an empty sample note.');
+  }
+
+  // Just in case Gemini still tries to be "clever"
+  const clean = text.replace(/```[\s\S]*?```/g, '').trim();
+  return clean;
+}
