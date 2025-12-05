@@ -4,22 +4,19 @@ An AI-powered medical record organizer built using Next.js 14 (App Router), Goog
 
 Users paste unformatted medical text, and the system automatically:
 
-Extracts structured medical fields
-
-Generates a clean Markdown report
-
-Saves the output to Firestore
-
-Displays all processed records in real time
+- Extracts structured medical fields
+- Generates a clean Markdown report
+- Saves the output to Firestore
+- Displays all processed records in real time
 
 This version uses no traditional login — it relies on either no auth or anonymous Firebase authentication, making it ideal for demos, prototypes, internal tooling, and pre-production environments.
 
-🚀 Features
-🧠 AI Medical Parsing
+## 🚀 Features
+### 🧠 AI Medical Parsing
 
 Uses Google Gemini 2.5 Flash with structured JSON output via responseSchema.
 
-⚡ Built with Next.js App Router
+###⚡ Built with Next.js App Router
 
 /app directory
 
@@ -27,7 +24,7 @@ Server & Client Components
 
 Fast refresh & edge-friendly architecture
 
-🔄 Real-Time Database Updates
+### 🔄 Real-Time Database Updates
 
 Records stored under:
 
@@ -36,21 +33,19 @@ artifacts/{APP_ID}/public/data/medicalRecords
 
 Firestore listeners update UI automatically.
 
-📄 Downloadable Markdown Reports
+### 📄 Downloadable Markdown Reports
 
 After processing, users can view or download a .md file summarizing the entire record.
 
-🎨 TailwindCSS UI
+### 🎨 TailwindCSS UI
 
 Clean, minimal design with:
 
-Input panel
+-Input panel
+-Real-time records list
+- Detail modal with markdown preview
 
-Real-time records list
-
-Detail modal with markdown preview
-
-🧱 Tech Stack
+### 🧱 Tech Stack
 Layer	Technology
 Framework	Next.js 14+ (App Router)
 Frontend	React, Client Components
@@ -59,7 +54,8 @@ AI Engine	Google Gemini 2.5 Flash
 Database	Firebase Firestore
 Authentication	Optional anonymous auth
 State	React Hooks
-📁 Project Structure (Next.js App Router)
+
+### 📁 Project Structure (Next.js App Router)
 /app
   /components
     /MedicalRecordOrganizer
@@ -139,7 +135,7 @@ Visit:
 
 http://localhost:3000
 
-🧠 AI Processing Workflow
+### 🧠 AI Processing Workflow
 1. User pastes raw text
 
 In the InputPanel.
@@ -191,7 +187,7 @@ Modal includes a Markdown preview + download button.
   "processedBy": "anonymous-uid",
 }
 
-💡 Future Enhancements
+### 💡 Future Enhancements
 
 Add full auth (email/password, Google OAuth, etc.)
 
@@ -205,7 +201,7 @@ Per-user Firestore isolation (if authentication added)
 
 HIPAA-ready rule configuration
 
-📦 Deployment (Next.js)
+### 📦 Deployment (Next.js)
 Recommended: Vercel
 
 Push project to GitHub
