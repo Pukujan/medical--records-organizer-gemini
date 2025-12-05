@@ -1,4 +1,4 @@
-\# 🚀 Gemini Medical Record Organizer (Next.js App Router — No Auth Version)
+# 🚀 Gemini Medical Record Organizer (Next.js App Router — No Auth Version)
 
 A lightweight AI-powered medical record organizer built using **Next.js 14 (App Router)**, **Google Gemini**, and **Firebase Firestore**.
 
@@ -8,13 +8,13 @@ Users can paste unformatted medical text — or now **generate messy sample data
 - Generate a clean Markdown medical report
 - Save structured results to Firestore
 - Display all processed records in real time
-- Download reports as \`.md\` files for reuse
+- Download reports as `.md` files for reuse
 
 This version includes **no authentication**, making it ideal for demos, prototypes, hackathons, and internal tooling.
 
 ---
 
-\# ✨ New Feature: “Load Sample Demo Data”
+# ✨ New Feature: “Load Sample Demo Data”
 
 A brand-new button, **Load Sample Demo Data**, lets users:
 
@@ -27,12 +27,12 @@ This uses a dedicated Gemini prompt designed to mimic real, unstructured clinica
 
 ---
 
-\# 📦 Features
+# 📦 Features
 
 - 🧠 AI medical text parsing using Gemini 2.5 Flash  
 - 🧪 Random messy sample note generator  
 - ⚡ Next.js App Router (modern, file-based structure)  
-- 🔄 Real-time Firestore syncing (\`onSnapshot\`)  
+- 🔄 Real-time Firestore syncing (`onSnapshot`)  
 - 📄 Automatic Markdown report generation  
 - 📥 Download structured reports  
 - 🎨 TailwindCSS styling  
@@ -40,21 +40,21 @@ This uses a dedicated Gemini prompt designed to mimic real, unstructured clinica
 
 ---
 
-\# 🧱 Tech Stack
+# 🧱 Tech Stack
 
-\| Layer \| Technology \|  
-\|-------\|------------\|  
-\| Framework \| Next.js 14 (App Router) \|  
-\| UI \| React, TailwindCSS \|  
-\| Database \| Firebase Firestore \|  
-\| AI Engine \| Google Gemini \|  
-\| Deployment \| Vercel \|  
+| Layer | Technology |  
+|-------|------------|  
+| Framework | Next.js 14 (App Router) |  
+| UI | React, TailwindCSS |  
+| Database | Firebase Firestore |  
+| AI Engine | Google Gemini |  
+| Deployment | Vercel |  
 
 ---
 
-\# 📁 Project Structure
+# 📁 Project Structure
 
-\`\`\`
+```
 /app
   /components
     /MedicalRecordOrganizer
@@ -66,23 +66,23 @@ This uses a dedicated Gemini prompt designed to mimic real, unstructured clinica
       utils.js
       config.js
   page.js
-\`\`\`
+```
 
 ---
 
-\# ⚙️ Installation
+# ⚙️ Installation
 
 ## 1️⃣ Install dependencies
 
-\`\`\`
+```
 npm install
-\`\`\`
+```
 
 ---
 
-## 2️⃣ Create \`.env.local\`
+## 2️⃣ Create `.env.local`
 
-\`\`\`env
+```env
 NEXT_PUBLIC_GEMINI_API_KEY="YOUR_GEMINI_KEY"
 
 NEXT_PUBLIC_FIREBASE_API_KEY="..."
@@ -93,11 +93,11 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="..."
 NEXT_PUBLIC_FIREBASE_APP_ID="..."
 
 NEXT_PUBLIC_APP_INSTANCE_ID="medical-org"
-\`\`\`
+```
 
 ---
 
-\# 🔥 Firebase Setup
+# 🔥 Firebase Setup
 
 ## Enable Firestore
 
@@ -115,7 +115,7 @@ Build → Authentication → Sign-in Method → Anonymous → Enable
 
 ## Firestore Rules (Development Only)
 
-\`\`\`
+```
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -124,17 +124,17 @@ service cloud.firestore {
     }
   }
 }
-\`\`\`
+```
 
 ⚠️ Not for production use.
 
 ---
 
-\# ▶️ Run the App
+# ▶️ Run the App
 
-\`\`\`
+```
 npm run dev
-\`\`\`
+```
 
 Visit:
 
@@ -142,7 +142,7 @@ http://localhost:3000
 
 ---
 
-\# 🧠 AI Processing Pipeline
+# 🧠 AI Processing Pipeline
 
 1. User pastes medical text  
    OR clicks **Load Sample Demo Data**  
@@ -151,18 +151,18 @@ http://localhost:3000
 4. The app converts it to Markdown  
 5. Firestore stores the data under:  
 
-\`\`\`
+```
 artifacts/{APP_ID}/public/data/medicalRecords
-\`\`\`
+```
 
 6. UI updates in real-time  
 7. User can open and download the report  
 
 ---
 
-\# 📄 Example Firestore Document
+# 📄 Example Firestore Document
 
-\`\`\`json
+```json
 {
   "patientName": "Jane Doe",
   "dob": "1985-01-28",
@@ -176,22 +176,22 @@ artifacts/{APP_ID}/public/data/medicalRecords
   "createdAt": "timestamp",
   "processedBy": "user-uuid"
 }
-\`\`\`
+```
 
 ---
 
-\# ✨ UI Enhancement — Sample Data Button
+# ✨ UI Enhancement — Sample Data Button
 
 Displayed as:
 
-\`\`\`
+```
 [ Process, Format & Save Record ]
 [ Load Sample Demo Data ]
-\`\`\`
+```
 
 ---
 
-\# 📦 Deployment (Vercel Recommended)
+# 📦 Deployment (Vercel Recommended)
 
 1. Push to GitHub  
 2. Import into Vercel  
@@ -200,7 +200,7 @@ Displayed as:
 
 ---
 
-\# 💡 Future Enhancements
+# 💡 Future Enhancements
 
 - Full authentication  
 - Per-user Firestore isolation  
@@ -211,18 +211,18 @@ Displayed as:
 
 ---
 
-\# 📝 License
+# 📝 License
 
 MIT License recommended:
 
-\`\`\`txt
+```txt
 MIT License
 Copyright ...
-\`\`\`
+```
 
 ---
 
-\# 🎉 Final Notes
+# 🎉 Final Notes
 
 This project demonstrates:
 
