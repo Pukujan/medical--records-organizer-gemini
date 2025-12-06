@@ -13,7 +13,6 @@ Users can paste unformatted medical text — or now **generate messy sample data
 This version includes **no authentication**, making it ideal for demos, prototypes, hackathons, and internal tooling.
 
 Vercel Demo: https://medical-records-organizer-gemini.vercel.app/
-Prototype & Presentation: https://water-matrix-96907145.figma.site
 ---
 
 # ✨ New Feature: “Load Sample Demo Data”
