@@ -1,4 +1,4 @@
-# 🚀 Gemini Medical Record Organizer (Next.js App Router(
+# 🚀 Gemini Medical Record Organizer (Next.js App Router)
 
 A lightweight AI-powered medical record organizer built using **Next.js 14 (App Router)**, **Google Gemini**, and **Firebase Firestore**.
 
