@@ -1,6 +1,10 @@
 # 🚀 Gemini Medical Record Organizer (Next.js App Router)
 
+
 A lightweight AI-powered medical record organizer built using **Next.js 14 (App Router)**, **Google Gemini**, and **Firebase Firestore**.
+
+
+### Warning all the data input here are public, DO NOT INPUT REAL MEDICAL DATA, YOU HAVE BEEN WARNED!
 
 Users can paste unformatted medical text — or now **generate messy sample data automatically** — and the system will:
 
